@@ -3,7 +3,7 @@
 - Consider setting up the PDM package manager.
 - Implement a custom dashboard. (FOR PID TWEAKING)
 - work on simulation (physics.py)
-- make sure the swerve code works with our modules (MK4i Swerve Module kraken x60 motor shaft)
+- make sure the swerve code works with our modules (MK4i Swerve Module kraken x60 motor shaft) check both chassis.py and swervermodule.py
 
 ### Code Structure (TODO: Convert to this)
 
