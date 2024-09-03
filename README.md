@@ -3,6 +3,7 @@
 - Consider setting up the PDM package manager.
 - Implement a custom dashboard. (FOR PID TWEAKING)
 - work on simulation (physics.py)
+- make sure the swerve code works with our motor controllers
 
 ### Code Structure (TODO: Convert to this)
 
