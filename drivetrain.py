@@ -21,17 +21,16 @@ class Drivetrain:
     """
 
     def __init__(self) -> None:
-        # need to find the locations
-        # self.frontLeftLocation = wpimath.geometry.Translation2d(0.381, 0.381)
-        # self.frontRightLocation = wpimath.geometry.Translation2d(0.381, -0.381)
-        # self.backLeftLocation = wpimath.geometry.Translation2d(-0.381, 0.381)
-        # self.backRightLocation = wpimath.geometry.Translation2d(-0.381, -0.381)
+        # need to find the locations and ids
+        self.frontLeftLocation = wpimath.geometry.Translation2d(0.381, 0.381)
+        self.frontRightLocation = wpimath.geometry.Translation2d(0.381, -0.381)
+        self.backLeftLocation = wpimath.geometry.Translation2d(-0.381, 0.381)
+        self.backRightLocation = wpimath.geometry.Translation2d(-0.381, -0.381)
 
-        # need to find ids
-        # self.frontLeft = swervemodule.SwerveModule(1, 2, 0, 1, 2, 3)
-        # self.frontRight = swervemodule.SwerveModule(3, 4, 4, 5, 6, 7)
-        # self.backLeft = swervemodule.SwerveModule(5, 6, 8, 9, 10, 11)
-        # self.backRight = swervemodule.SwerveModule(7, 8, 12, 13, 14, 15)
+        self.frontLeft = swervemodule.SwerveModule(1, 2, 0, 1, 2, 3)
+        self.frontRight = swervemodule.SwerveModule(3, 4, 4, 5, 6, 7)
+        self.backLeft = swervemodule.SwerveModule(5, 6, 8, 9, 10, 11)
+        self.backRight = swervemodule.SwerveModule(7, 8, 12, 13, 14, 15)
 
         self.gyro = wpilib.AnalogGyro(0)
 
