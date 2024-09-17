@@ -11,14 +11,15 @@ import wpilib.drive
 import wpimath.filter
 import wpimath.controller
 import drivetrain
-# import phoenix6
+import phoenix6
+import time
 
 
 class MyRobot(wpilib.TimedRobot):
     def robotInit(self) -> None:
         """Robot initialization function"""
-        self.controller = wpilib.XboxController(0)
-        self.swerve = drivetrain.Drivetrain()
+        self.joystick = wpilib.XboxController(0)
+        # self.swerve = drivetrain.Drivetrain()
 
         # Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
         self.xspeedLimiter = wpimath.filter.SlewRateLimiter(3)
@@ -31,19 +32,40 @@ class MyRobot(wpilib.TimedRobot):
         print("auto periodic")
 
     def teleopInit(self) -> None:
-        # phoenix6.unmanaged.feed_enable(1)
         print("init")
+        self.talonfx = phoenix6.hardware.TalonFX(2)
+        self.timer = wpilib.Timer()
+        self.timer.start()
+        self.control = phoenix6.controls.DutyCycleOut(0)
+        
 
-    def teleopPeriodic(self) -> None:
-        print("teleop periodic")
-        self.driveWithJoystick(True)
+    def teleopPeriodic(self):
+        """Every 100ms, print the status of the StatusSignal"""
+        self.talonfx.set_control(self.control.with_output(self.joystick.getLeftY()))
+        if self.timer.hasElapsed(0.1):
+            self.timer.reset()
+            # get_position automatically calls refresh(), no need to manually refresh.
+            #
+            # StatusSignals also implement the str dunder to provide a useful print of the signal
+            pos = self.talonfx.get_position()
+            print(f"Positions is {str(pos)} with {pos.timestamp.get_latency()} seconds of latency")
+
+            # Get the velocity StatusSignal
+            vel = self.talonfx.get_velocity()
+            # This time wait for the signal to reduce latency
+            vel.wait_for_update(0.1)
+            print(f"Velocity is {vel} with {vel.timestamp.get_latency()} seconds of latency")
+
+            print("")
+
+
 
     def driveWithJoystick(self, fieldRelative: bool) -> None:
         # Get the x speed. We are inverting this because Xbox controllers return
         # negative values when we push forward.
         xSpeed = (
             -self.xspeedLimiter.calculate(
-                wpimath.applyDeadband(self.controller.getLeftY(), 0.02)
+                wpimath.applyDeadband(self.joystick.getLeftY(), 0.02)
             )
             * drivetrain.kMaxSpeed
         )
@@ -53,7 +75,7 @@ class MyRobot(wpilib.TimedRobot):
         # return positive values when you pull to the right by default.
         ySpeed = (
             -self.yspeedLimiter.calculate(
-                wpimath.applyDeadband(self.controller.getLeftX(), 0.02)
+                wpimath.applyDeadband(self.joystick.getLeftX(), 0.02)
             )
             * drivetrain.kMaxSpeed
         )
@@ -64,10 +86,10 @@ class MyRobot(wpilib.TimedRobot):
         # the right by default.
         rot = (
             -self.rotLimiter.calculate(
-                wpimath.applyDeadband(self.controller.getRightX(), 0.02)
+                wpimath.applyDeadband(self.joystick.getRightX(), 0.02)
             )
             * drivetrain.kMaxSpeed
         )
 
-        self.swerve.drive(xSpeed, ySpeed, rot, fieldRelative, self.getPeriod())
+        # self.swerve.drive(xSpeed, ySpeed, rot, fieldRelative, self.getPeriod())
         print(f"Variables: {xSpeed}, {ySpeed}, {rot}, {fieldRelative}, {self.getPeriod()}")
