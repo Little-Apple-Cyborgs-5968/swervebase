@@ -3,6 +3,7 @@
 - Consider setting up the PDM package manager.
 - Implement a custom dashboard. (FOR PID TWEAKING)
 - work on simulation (physics.py)
+- Get swerve to work lol
 
 ### Code Structure (TODO: Convert to this)
 

@@ -27,7 +27,7 @@ class MyRobot(wpilib.TimedRobot):
     def autonomousPeriodic(self) -> None:
         # self.driveWithJoystick(False)
         # self.swerve.updateOdometry()
-        print("test")
+        print("auto periodic")
 
     def teleopPeriodic(self) -> None:
         print("teleop periodic")
