@@ -17,12 +17,12 @@ class MyRobot(wpilib.TimedRobot):
     def robotInit(self) -> None:
         """Robot initialization function"""
         self.controller = wpilib.XboxController(0)
-        # self.swerve = drivetrain.Drivetrain()
+        self.swerve = drivetrain.Drivetrain()
 
         # Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
-        # self.xspeedLimiter = wpimath.filter.SlewRateLimiter(3)
-        # self.yspeedLimiter = wpimath.filter.SlewRateLimiter(3)
-        # self.rotLimiter = wpimath.filter.SlewRateLimiter(3)
+        self.xspeedLimiter = wpimath.filter.SlewRateLimiter(3)
+        self.yspeedLimiter = wpimath.filter.SlewRateLimiter(3)
+        self.rotLimiter = wpimath.filter.SlewRateLimiter(3)
 
     def autonomousPeriodic(self) -> None:
         # self.driveWithJoystick(False)
@@ -30,8 +30,8 @@ class MyRobot(wpilib.TimedRobot):
         print("test")
 
     def teleopPeriodic(self) -> None:
-        # self.driveWithJoystick(True)
-        print(self.controller.getLeftY())
+        print("teleop periodic")
+        self.driveWithJoystick(True)
 
     def driveWithJoystick(self, fieldRelative: bool) -> None:
         # Get the x speed. We are inverting this because Xbox controllers return
@@ -65,3 +65,4 @@ class MyRobot(wpilib.TimedRobot):
         )
 
         self.swerve.drive(xSpeed, ySpeed, rot, fieldRelative, self.getPeriod())
+        print(f"Variables: {xSpeed}, {ySpeed}, {rot}, {fieldRelative}, {self.getPeriod()}")
