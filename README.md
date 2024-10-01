@@ -4,6 +4,7 @@
 - Implement a custom dashboard. (FOR PID TWEAKING)
 - work on simulation (physics.py)
 - Get swerve to work lol
+- I think the code is for PWM Motor Controllers but these are CAN based
 
 ### Code Structure (TODO: Convert to this)
 
