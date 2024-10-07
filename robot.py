@@ -11,6 +11,7 @@ import wpilib.drive
 import wpimath.filter
 import wpimath.controller
 import drivetrain
+import phoenix6
 
 
 class MyRobot(wpilib.TimedRobot):
@@ -28,6 +29,9 @@ class MyRobot(wpilib.TimedRobot):
         # self.driveWithJoystick(False)
         # self.swerve.updateOdometry()
         print("auto periodic")
+
+    def teleopInit(self) -> None:
+        phoenix6.unmanaged.feed_enable(1)
 
     def teleopPeriodic(self) -> None:
         print("teleop periodic")
