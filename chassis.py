@@ -36,9 +36,9 @@ from ids import CancoderIds, TalonIds
 
 
 class SwerveModule:
-    DRIVE_GEAR_RATIO = (14.0 / 50.0) * (25.0 / 19.0) * (15.0 / 45.0)
-    STEER_GEAR_RATIO = (14 / 50) * (10 / 60)
-    WHEEL_CIRCUMFERENCE = 4 * 2.54 / 100 * math.pi
+    DRIVE_GEAR_RATIO = (14.0 / 50.0) * (27.0 / 17.0) * (15.0 / 45.0) # 1/6.75 L2 ratio
+    STEER_GEAR_RATIO = (14 / 50) * (10 / 60) # 1/(150/7)
+    WHEEL_CIRCUMFERENCE = 4 * 2.54 / 100 * math.pi # 4 inch outer diameter to meters then divided by pi for circumference 
 
     DRIVE_MOTOR_REV_TO_METRES = WHEEL_CIRCUMFERENCE * DRIVE_GEAR_RATIO
     STEER_MOTOR_REV_TO_RAD = math.tau * STEER_GEAR_RATIO
@@ -196,12 +196,12 @@ class SwerveModule:
 
 class ChassisComponent:
     # metres between centre of left and right wheels
-    TRACK_WIDTH = 0.467
+    TRACK_WIDTH = 0.467 # still need to measure
     # metres between centre of front and back wheels
-    WHEEL_BASE = 0.467
+    WHEEL_BASE = 0.467 # still need to measure
 
     # size including bumpers
-    LENGTH = 0.600 + 2 * 0.09
+    LENGTH = 0.600 + 2 * 0.09 # I dont think we have numpers yet
     WIDTH = LENGTH
 
     DRIVE_CURRENT_THRESHOLD = 35

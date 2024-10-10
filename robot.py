@@ -10,7 +10,6 @@ import wpimath
 import wpilib.drive
 import wpimath.filter
 import wpimath.controller
-import drivetrain
 import phoenix6
 import time
 
